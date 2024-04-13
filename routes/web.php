@@ -26,6 +26,15 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/home', function() {
+    return Inertia::render('Home', [
+        'name' => 'Hunter! :)',
+        'frameworks' => [
+            'Laravel', 'React', 'Inertia'
+        ]
+    ]);
+});
+
 Route::resource('/post', PostController::class);
 
 Route::get('/dashboard', function () {
