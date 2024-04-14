@@ -34,6 +34,8 @@ createInertiaApp({
         // Whether the NProgress spinner will be shown...
         showSpinner: true,
       },
+
+      title: title => title + ": : My app",
     
 });
 

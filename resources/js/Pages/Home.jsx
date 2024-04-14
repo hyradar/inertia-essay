@@ -14,7 +14,7 @@ export default function Home({ name, frameworks }) {
                 // multiple meta tags from being in the <head>
                 // theres a generic one as a backup in layout
                 // but you don't want them both in the head at once
-                head-key="description" 
+                head-key="Home description" 
                 />
             </Head>
             

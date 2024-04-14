@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
             PostsTableSeeder::class,
             // Other seeders...
         ]);
+
+        // Create 100 users using the User factory
+        User::factory(100)->create();
     }
 }

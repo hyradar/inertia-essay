@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use Inertia\Inertia;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +36,15 @@ Route::get('/home', function() {
     ]);
 });
 
+// this is how you only pass the name
+// if you send the entire user table / column then it will
+// all go to the client
 Route::get('/users', function() {
-    return Inertia::render('Users');
+    return Inertia::render('Users', [
+        'users' => User::all()->map(fn($user) => [
+            'name' => $user->name
+        ])
+    ]);
 });
 
 Route::get('/settings', function() {
