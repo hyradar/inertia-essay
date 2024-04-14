@@ -43,6 +43,10 @@ Route::get('/settings', function() {
     return Inertia::render('Settings');
 });
 
+Route::post('/logout', function() {
+    dd("logging the user out");
+});
+
 Route::resource('/post', PostController::class);
 
 Route::get('/dashboard', function () {

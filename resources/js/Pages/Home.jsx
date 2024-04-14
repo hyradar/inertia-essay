@@ -1,15 +1,35 @@
-import Nav from "@/Shared/Nav";
+import { Head } from "@inertiajs/inertia-react";
 
 export default function Home({ name, frameworks }) {
     return (
+        // <Layout>
         <>
+            {/* <Head title="Your page title" /> */}
+
+            <Head  title="Home Page">
+            <meta 
+                type="home description" 
+                content="Home information" 
+                // the head-key attribute is what prevents
+                // multiple meta tags from being in the <head>
+                // theres a generic one as a backup in layout
+                // but you don't want them both in the head at once
+                head-key="description" 
+                />
+            </Head>
+            
             <h1>Hello, {name}</h1>
+            <p>Your frameworks are:</p>
             <ul>
-                {frameworks.map((cadre) => (
-                    <li>{cadre}</li>
+                {frameworks.map((framework) => (
+                    <li key={framework}>{framework}</li>
                 ))}
             </ul>
-            <Nav></Nav>
+            {/* </Layout> */}
         </>
-    )
+        
+        
+    );
 }
+
+// Home.layout = page => <Layout children={page} title="Welcome" />
