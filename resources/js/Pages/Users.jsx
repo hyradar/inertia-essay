@@ -1,8 +1,10 @@
 import { Head } from "@inertiajs/inertia-react";
+import { Link } from "@inertiajs/inertia-react";
+import Paginator from "@/Shared/Paginator";
 
 export default function Users( { users } ) {
     return (
-        <>
+        <div className="flex flex-col text-center items-center">
             <Head  title="Users Page">
             <meta 
                 type="Users description" 
@@ -16,10 +18,26 @@ export default function Users( { users } ) {
             </Head>
             <h1>Users Page</h1>
 
-            {users.map((user) => (
-                    <li class="list-none" key={user.id}>{user.name}</li>
+        <table className="">
+            <tr>    
+                <th className="text-center">Contact</th>
+            </tr>
+            {users.data.map((user) => (
+                    <tr>
+                        <td key={user.id}>{user.name}Alfreds Futterkiste</td>
+                    </tr>
             ))}
-        </>
+        </table>
+
+        <div className="flex space-x-4">
+        {users.links.map((link) => (
+            <Link href={link.url}>{link.label}</Link>
+        ))}
+
+        {/* <Paginator links={users.links} /> */}
+
+        </div>
+        </div>
     )
 }
 
