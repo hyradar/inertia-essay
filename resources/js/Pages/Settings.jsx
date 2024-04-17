@@ -1,4 +1,5 @@
 import Layout from "@/Shared/Layout";
+import { Head } from "@inertiajs/inertia-react";
 
 export default function Settings() {
     return (
