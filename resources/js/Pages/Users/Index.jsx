@@ -2,19 +2,20 @@ import { Head } from "@inertiajs/inertia-react";
 import { Link } from "@inertiajs/inertia-react";
 import { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { throttle, debounce } from "lodash";
 
 export default function Users( { users, filters } ) {
     const [inputValue, setInputValue] = useState(filters.search);
 
       // Event handler to handle input changes
-  const handleInputChange = (event) => {
+  const handleInputChange = debounce((event) => {
     event.preventDefault(); 
     // Update the inputValue state with the new value entered by the user
     const newValue = event.target.value;
     console.log("New input:", newValue);
     setInputValue(newValue);
     getNewNames(newValue);
-  };
+  }, 300);
 
  const getNewNames = (value) => {
     Inertia.get('/users', { search: value }, {
