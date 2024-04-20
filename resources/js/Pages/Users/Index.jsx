@@ -44,6 +44,26 @@ export default function Users( { users, filters } ) {
             <div className="flex gap-4 justify-between w-100 mb-8">
 
                 <h1 className="self-center">Users Page</h1>
+
+                <div className="flex items-center">
+                    <h1 className="text-3xl">Users</h1>
+
+                    <Link 
+                        href="/users/create" 
+                        className="text-blue-500 text-sm"
+                    >
+                        New User
+                    </Link>
+
+                    <input 
+                        v-model="search"
+                        type="text"
+                        placeholder="Search..."
+                        className="border px-2 rounded-lg"
+                    >
+                        </input>
+
+                </div>
                 <input 
                     className="w-40"
                     type="text" 

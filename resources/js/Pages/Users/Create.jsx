@@ -1,13 +1,26 @@
 import { Head } from "@inertiajs/inertia-react"
 import { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
+import { useForm } from "@inertiajs/inertia-react";
 
 export default function Create() {
+    // const errors = usePage().props.errors;
+    // const [processing, setProcessing] = useState(false);
 
-    const [form, setForm] = useState({
+    // console.log(errors);
+
+    // const [form, setForm] = useState({
+    //     name: '',
+    //     email: '',
+    //     password: ''
+    // });
+
+    const { data, setData, post, processing, errors } = useForm({
         name: '',
         email: '',
-        password: ''
+        password: '',
+        remember: false
       });
 
     const handleInputChange = (event) => {
@@ -22,7 +35,13 @@ export default function Create() {
         event.preventDefault();
         // first argument - where you are sending the post request
         // second argument = the data
-        Inertia.post('/users', form);
+
+        post('/users');
+
+        // Inertia.post('/users', form, {
+        //     onStart () { setProcessing(true)},
+        //     onFinish () { setProcessing(false)},
+        // });
       }
 
 
@@ -32,7 +51,8 @@ export default function Create() {
 
             <h1 className="text-3xl">Create New User</h1>  
 
-
+            {/* Inertia Forms Docs */}
+            {/* https://www.inertiajs.com/forms */}
             <form 
                 method="POST" 
                 action="/" 
@@ -43,7 +63,7 @@ export default function Create() {
                     {/* Name */}
                     <label 
                         className = "block mb-2 uppercase font-bold text-xs text-gray-700"
-                        for = "name"
+                        htmlFor = "name"
                     >
                         Name
                     </label>
@@ -53,17 +73,23 @@ export default function Create() {
                         type="text"
                         name="name"
                         id="name"
-                        onChange={handleInputChange}
-                        value={form.name}
-                        required
+                        onChange={e => setData('name', e.target.value)}
+                        value={data.name}
+                        // required
                     >
                     
                     </input>
+                    {errors.name &&
+                        <div className="text-red-500 text-xs mt-1">
+                            {errors.name}
+                        </div>
+                    }
+                    <div></div>
 
                     {/* Email */}
                     <label 
                         className = "block mb-2 uppercase font-bold text-xs text-gray-700"
-                        for = "email"
+                        htmlFor = "email"
                     >
                         Email
                     </label>
@@ -73,18 +99,23 @@ export default function Create() {
                         type="email"
                         name="email"
                         id="email"
-                        onChange={handleInputChange}
-                        value={form.email}
-                        required
+                        onChange={e => setData('email', e.target.value)}
+                        value={data.email}
+                        // required
                     >
-                    
                     </input>
 
+                    {errors.email &&
+                        <div className="text-red-500 text-xs mt-1">
+                            {errors.email}
+                        </div>
+                    }
 
-                    {/* password */}
+
+                    {/* Password */}
                     <label 
                         className = "block mb-2 uppercase font-bold text-xs text-gray-700"
-                        for = "password"
+                        htmlFor = "password"
                     >
                         Password
                     </label>
@@ -94,18 +125,31 @@ export default function Create() {
                         type="password"
                         name="password"
                         id="password"
-                        onChange={handleInputChange}
-                        value={form.password}
-                        required
+                        onChange={e => setData('password', e.target.value)}
+                        value={data.password}
+                        // required
                     >
                     
                     </input>
+
+                    {errors.password &&
+                        <div className="text-red-500 text-xs mt-1">
+                            {errors.password}
+                        </div>
+                    }
                 </div>
 
+                <input type="checkbox" checked={data.remember} onChange={e => setData('remember', e.target.checked)} /> Remember Me
+
+
+
                 <div className="mb-8">
+
+                    
                     <button
                     type="submit"
                     className="bg-blue-400 text-white rounded py-2 px-4 hoverbg-blue-500"
+                    disabled={processing}
                     >
                         Submit
                     </button>
