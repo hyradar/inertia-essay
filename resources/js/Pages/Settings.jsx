@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/inertia-react";
 
 export default function Settings() {
     return (
-        <>
+        <Layout>
         <Head  title="Settings Page">
             <meta 
                 type="Settings description" 
@@ -16,7 +16,7 @@ export default function Settings() {
                 />
             </Head>
             <h1>Settings Page</h1>
-        </>
+        </Layout>
     )
 }
 

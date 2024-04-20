@@ -1,11 +1,10 @@
 import { Head } from "@inertiajs/inertia-react";
+import Layout from "@/Shared/Layout";
 
 export default function Home({ name, frameworks }) {
     return (
-        // <Layout>
+        <Layout>
         <>
-            {/* <Head title="Your page title" /> */}
-
             <Head  title="Home Page">
             <meta 
                 type="home description" 
@@ -25,8 +24,8 @@ export default function Home({ name, frameworks }) {
                     <li key={framework}>{framework}</li>
                 ))}
             </ul>
-            {/* </Layout> */}
         </>
+            </Layout>
         
         
     );

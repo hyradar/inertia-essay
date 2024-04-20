@@ -3,6 +3,7 @@ import { Link } from "@inertiajs/inertia-react";
 import { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { throttle, debounce } from "lodash";
+import Layout from "@/Shared/Layout";
 
 export default function Users( { users, filters } ) {
     const [inputValue, setInputValue] = useState(filters.search);
@@ -30,6 +31,7 @@ export default function Users( { users, filters } ) {
 }
 
     return (
+    <Layout>
         <div className="flex flex-col text-center items-center">
             <Head  title="Users Page">
             <meta 
@@ -88,15 +90,16 @@ export default function Users( { users, filters } ) {
             ))}
         </table>
 
-        <div className="flex space-x-4">
-        {users.links.map((link) => (
-            <Link href={link.url}>{link.label}</Link>
-        ))}
+            <div className="flex space-x-4">
+            {users.links.map((link) => (
+                <Link href={link.url}>{link.label}</Link>
+            ))}
 
-        {/* <Paginator links={users.links} /> */}
+            {/* <Paginator links={users.links} /> */}
 
+            </div>
         </div>
-        </div>
+    </Layout>
     )
 }
 

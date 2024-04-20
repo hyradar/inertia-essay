@@ -33,10 +33,20 @@ use Illuminate\Support\Facades\Request;
 //         'phpVersion' => PHP_VERSION,
 //     ]);
 // });
+
+
 Route::get('/login', [LoginController::class, 'create'])->name('login');
+Route::post('/login', [LoginController::class, 'store'])->name('login');
+
+// we only want logged in useres to be able to access this
+// could easily put it in the auth middleware below
+//or to keep iut close to the other endpoints, can just tack on
+// the middleware at the end
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout')->middleware('auth');
 
 Route::middleware('auth')->group(function () {
 
+    
 
 // Route::get('/login', function () {
 //     return Inertia::render('Home', [
@@ -45,7 +55,7 @@ Route::middleware('auth')->group(function () {
 //             'Laravel', 'React', 'Inertia'
 //         ]
 //     ]);
-// })->name('home');
+// })->name('hoeme');
 
 Route::get('/home', function () {
     return Inertia::render('Home', [
@@ -114,12 +124,6 @@ Route::get('/settings', function () {
 });
 
 });
-
-Route::post('/logout', function () {
-    dd("logging the user out");
-});
-
-
 
 // Route::resource('/post', PostController::class);
 
