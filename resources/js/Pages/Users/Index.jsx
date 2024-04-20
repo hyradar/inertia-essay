@@ -5,7 +5,7 @@ import { Inertia } from "@inertiajs/inertia";
 import { throttle, debounce } from "lodash";
 import Layout from "@/Shared/Layout";
 
-export default function Users( { users, filters } ) {
+export default function Users( { can, users, filters } ) {
     const [inputValue, setInputValue] = useState(filters.search);
 
       // Event handler to handle input changes
@@ -51,12 +51,18 @@ export default function Users( { users, filters } ) {
                 <div className="flex items-center">
                     <h1 className="text-3xl">Users</h1>
 
-                    <Link 
+                    {can.createUser
+                    ?
+                        <Link 
                         href="/users/create" 
                         className="text-blue-500 text-sm"
-                    >
-                        New User
-                    </Link>
+                        >
+                            New User
+                        </Link> 
+                    :
+                        <></>
+                    }
+                    
 
                     <input 
                         v-model="search"
@@ -79,15 +85,29 @@ export default function Users( { users, filters } ) {
             </div>
             
 
-        <table className="">
+        <table className="flex-center-row w-screen">
             <tr>    
                 <th className="text-center">Contact</th>
             </tr>
+
             {users.data.map((user) => (
+                <div className="flex justify-between w-1/2 mx-10">
+
                     <tr>
-                        <td key={user.id}>{user.name}Alfreds Futterkiste</td>
+                        <td key={user.id}>{user.name}</td>
                     </tr>
+
+                    <br />
+                    { user.can.edit
+                        ? <Link>Edit User</Link>
+                        : <></>
+                    }
+                </div>
+
             ))}
+
+
+
         </table>
 
             <div className="flex space-x-4">
