@@ -14,7 +14,13 @@ createInertiaApp({
         resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx'))
         const pages = import.meta.glob('./Pages/**/*.jsx', { eager: true })
         const page = pages[`./Pages/${name}.jsx`]
-        page.default.layout ??= (page => <Layout children={page} />)
+
+        // this makes it so that the 'logged in' layout only applies
+        // if the user is logged in. Will show a different layout for pages where
+        // the user is not logged in.
+        if (page.default.layout === undefined) {
+            page.default.layout = <Layout children={page} />;
+        }
         return page
     },
     setup({ el, App, props }) {
